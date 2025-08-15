@@ -1,0 +1,113 @@
+attributetype ( 1.3.6.1.4.1.32473.1.1
+        NAME 'dateOfBirth'
+        SUP name )
+
+attributetype ( 1.3.6.1.4.1.32473.1.2
+        NAME 'device'
+        SUP name )
+
+attributetype ( 1.3.6.1.4.1.32473.1.3
+        NAME 'operatingSystem'
+        SUP name )
+
+attributetype ( 1.3.6.1.4.1.32473.1.4
+        NAME 'router'
+        SUP name )
+
+attributetype ( 1.3.6.1.4.1.32473.1.5
+        NAME 'ssid'
+        SUP name )
+
+attributetype ( 1.3.6.1.4.1.32473.1.6
+        NAME 'link'
+        SINGLE-VALUE
+        SUP name )
+
+attributetype ( 1.3.6.1.4.1.32473.1.7
+        NAME 'deleted'
+        DESC 'Describes whether or not the object is deleted.'
+        SYNTAX  1.3.6.1.4.1.1466.115.121.1.7
+        SINGLE-VALUE )
+
+objectclass ( 1.3.6.1.4.1.32473.2.1
+        NAME 'modernPerson'
+        DESC 'Used to describe a person, mostly used to link other objects via their (other objects) "owner" or "manager" attributes to show ownership over said object.'
+        SUP top
+        STRUCTURAL
+        MUST ( cn )
+        MAY ( dateOfBirth $ sn $ userPassword $ telephoneNumber $ seeAlso $
+        description $ title $ x121Address $ registeredAddress $
+        destinationIndicator $ preferredDeliveryMethod $ telexNumber $
+        teletexTerminalIdentifier $ telephoneNumber $ internationalISDNNumber $
+        facsimileTelephoneNumber $ street $ postOfficeBox $ postalCode $
+        postalAddress $ physicalDeliveryOfficeName $ ou $ st $ l $ audio $
+        businessCategory $ carLicense $ departmentNumber $ displayName $
+        employeeNumber $ employeeType $ givenName $ homePhone $
+        homePostalAddress $ initials $ jpegPhoto $ labeledURI $ mail $ manager
+        $ mobile $ o $ pager $ photo $ roomNumber $ secretary $ uid $
+        userCertificate $ x500uniqueIdentifier $ preferredLanguage $
+        userSMIMECertificate $ userPKCS12 ) )
+
+objectclass ( 1.3.6.1.4.1.32473.2.2
+        NAME 'modernOrganization'
+        DESC 'Used to describe an organization.'
+        SUP organization
+        STRUCTURAL
+        MAY ( labeledUri ) )
+
+objectclass ( 1.3.6.1.4.1.32473.2.3
+        NAME 'modernAccount'
+        DESC 'Used to describe an account which is linked to the person that owns it via the "owner" attribute.'
+        SUP top
+        STRUCTURAL
+        MUST ( uid $ owner )
+        MAY ( deleted $ dateOfBirth $ cn $ sn $ userPassword $ telephoneNumber $ seeAlso
+        $ description $ title $ x121Address $ registeredAddress $
+        destinationIndicator $ preferredDeliveryMethod $ telexNumber $
+        teletexTerminalIdentifier $ telephoneNumber $ internationalISDNNumber $
+        facsimileTelephoneNumber $ street $ postOfficeBox $ postalCode $
+        postalAddress $ physicalDeliveryOfficeName $ ou $ st $ l $ audio $
+        businessCategory $ carLicense $ departmentNumber $ displayName $
+        employeeNumber $ employeeType $ givenName $ homePhone $ homePostalAddress
+        $ initials $ jpegPhoto $ labeledURI $ mail $ manager $ mobile $ o $
+        pager $ photo $ roomNumber $ secretary $ userCertificate $
+        x500uniqueIdentifier $ preferredLanguage $ userSMIMECertificate $
+        userPKCS12 ) )
+
+objectclass ( 1.3.6.1.4.1.32473.2.4
+        NAME 'modernDevice'
+        DESC 'Used to describe a computer'
+        SUP device
+        STRUCTURAL
+        MUST ( device $ description )
+        MAY ( operatingSystem $ registeredAddress ) )
+
+objectclass ( 1.3.6.1.4.1.32473.2.5
+        NAME 'network'
+        DESC 'For keeping information pertaining to networks of all kinds. The "manager" attribute should link to either the the person or the organization that owns the network. The "router" attribute should link to the DN of a router device on the network.'
+        SUP top
+        STRUCTURAL
+        MUST ( cn $ registeredAddress $ description )
+        MAY ( ipNetworkNumber $ ipNetmaskNumber $ manager $ router ) )
+
+objectclass ( 1.3.6.1.4.1.32473.2.6
+        NAME 'wifiNetwork'
+        DESC 'For keeping information pertaining to wifi networks. The "manager" attribute should link to either the person or organization that owns the network.'
+        SUP network
+        STRUCTURAL
+        MUST ( ssid ) )
+
+objectclass ( 1.3.6.1.4.1.32473.2.7
+        NAME 'ssoUserAlias'
+        DESC 'Just a way of showing a link between two entries.'
+        SUP top
+        STRUCTURAL
+        MUST ( uid $ link )
+        MAY ( businessCategory $ description $ deleted $ labeledUri ) )
+
+objectclass ( 1.3.6.1.4.1.32473.2.8
+        NAME 'modernApplication'
+        DESC 'Used to describe an application installed on a modernDevice object'
+        SUP top
+        STRUCTURAL
+        MUST ( cn $ description ) )
