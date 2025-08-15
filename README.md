@@ -1,5 +1,7 @@
 # LDAP Locker
 
+🌾 Organically coded by yours truly with minimal use of clankers.
+
 I didn't plan on making this public when I created it.
 
 I apologize in advance for my terrible code and documentation...
@@ -235,7 +237,9 @@ Entries and secrets will be linked via the full distinguished name of the LDAP e
 
 ### Example Secrets Entries
 
+~~~
 Id, DistinguishedName, Expired, Category, Description, Secret
 1, 'uid=username1,o=xbox', 0, 'password', '', fjioawpu8rh938290==
 2, 'uid=username1,o=xbox', 0, 'security question', 'Name of first dog?', 3r2893noury==
 3, 'uid=username1,o=xbox', 0, 'security question', 'Name of highschool?', oahf9y8h==
+~~~
